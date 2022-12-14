@@ -17,9 +17,7 @@ function startcount() {
       sec = 0
       min += 1
     }
-    _mlsec.innerHTML = mlsec
-    _min.innerHTML = min
-    _sec.innerHTML = sec
+    screenUpdate()
   }, 10)
 }
 
@@ -38,7 +36,35 @@ document.getElementById('reset').onclick = function () {
   sec = 0
   min = 0
 
-  _mlsec.innerHTML = mlsec
-  _min.innerHTML = min
-  _sec.innerHTML = sec
+  screenUpdate()
+}
+
+function screenUpdate() {
+  // 1/100 sec
+  if (mlsec == 0) {
+    _mlsec.innerHTML = '00'
+  } else {
+    _mlsec.innerHTML = mlsec
+    if (mlsec.lenght < 1) {
+      _mlsec.innerHTML = '0' + mlsec
+    }
+  }
+  //sec
+  if (sec == 0) {
+    _sec.innerHTML = '00'
+  } else {
+    _sec.innerHTML = sec
+    if (_sec.innerHTML.length == 1) {
+      _sec.innerHTML = '0' + sec
+    }
+  }
+  //min
+  if (min == 0) {
+    _min.innerHTML = '00'
+  } else {
+    _min.innerHTML = min
+    if (_min.innerHTML.length == 1) {
+      _min.innerHTML = '0' + min
+    }
+  }
 }
