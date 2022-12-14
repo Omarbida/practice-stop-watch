@@ -5,6 +5,7 @@ let _mlsec = document.getElementById('mlsec')
 let mlsec = 0
 let sec = 0
 let min = 0
+let startCountUp
 function startcount() {
   return setInterval(() => {
     mlsec += 1
@@ -22,11 +23,15 @@ function startcount() {
   }, 10)
 }
 
+let cleared = true
+
 document.getElementById('stop').onclick = function () {
   clearInterval(startCountUp)
+  cleared = true
 }
 document.getElementById('start').onclick = function () {
-  startCountUp = startcount()
+  startCountUp = startCountUp && !cleared ? startCountUp : startcount()
+  cleared = false
 }
 document.getElementById('reset').onclick = function () {
   mlsec = 0
