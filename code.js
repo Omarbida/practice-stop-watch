@@ -7,15 +7,16 @@ let sec = 0
 let min = 0
 let startCountUp
 let runing = false
-
+let lastSave = ''
 const save =
   '<div class="row checkpoints col-12">\
+    <div class=" col-2 save"></div>\
     <div class="col-2 save">$$min</div>\
-    <div class="separat col-1 save">:</div>\
+    <div class=" col-1 save">:</div>\
     <div class="col-2 save">$$sec</div>\
-    <div class="separat col-1 save">:</div>\
+    <div class=" col-1 save">:</div>\
     <div class="col-2 save">$$mlsec</div>\
-  </div>'
+  <div class=" col-2 save"></div>    </div>'
 
 show('start')
 hide('stop')
@@ -56,14 +57,17 @@ document.getElementById('reset').onclick = function () {
   sec = 0
   min = 0
   _checkpoints.innerHTML = ''
+  lastSave = ''
   screenUpdate()
 }
 document.getElementById('save').onclick = function () {
-  if (runing) {
+  if (lastSave != `${min}${sec}${mlsec}`) {
     _checkpoints.innerHTML += save
       .replaceAll('$$min', min)
       .replaceAll('$$sec', sec)
       .replaceAll('$$mlsec', mlsec)
+
+    lastSave = `${min}${sec}${mlsec}`
   }
 }
 
